@@ -31,7 +31,7 @@ private
   end
 
   def user_id
-    controller = 'users' ? params[:id] : params[:user_id]
+    params[:controller] == 'users' ? params[:id] : params[:user_id]
   end
 
 end

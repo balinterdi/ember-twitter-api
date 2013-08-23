@@ -1,12 +1,7 @@
 class UsersController < ApplicationController
   respond_to :json
-  skip_before_filter :set_oauth_tokens, only: :create
-  skip_before_filter :verify_oauth_token, only: :create
-
-  def show
-    cached_user = cache(cache_key) { logger.debug "TWITTER"; twitter_client.user }
-    respond_with cached_user
-  end
+  skip_before_filter :set_oauth_tokens
+  skip_before_filter :verify_oauth_token
 
   def create
     user = User.where(nickname: params[:nickname]).first

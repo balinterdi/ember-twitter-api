@@ -1,8 +1,14 @@
 EmberTwitterApi::Application.routes.draw do
   get 'auth/twitter/callback', to: 'sessions#create'
-  resource   :session #TODO: this should probably be a singleton
-  resources  :timelines, only: :show
-  resources  :users
+  resource   :session
+  namespace :twitter do
+    resources :timelines do
+      get :home, on: :collection
+    end
+    resource :user, only: :show
+  end
+
+  resources  :users, only: :create
 
   get 'home' => 'home#index'
 
