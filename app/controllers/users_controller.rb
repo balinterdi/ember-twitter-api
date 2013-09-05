@@ -11,7 +11,8 @@ class UsersController < ApplicationController
     else
       User.create!(user_params)
     end
-    respond_with user
+    # respond_with :user fails with a cryptic error
+    render json: user.to_json
   end
 
   private
