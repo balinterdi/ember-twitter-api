@@ -11,6 +11,7 @@ gem 'sass-rails', '~> 4.0.0'
 
 gem 'omniauth-twitter'
 gem 'twitter'
+gem 'rack-cors', require: 'rack/cors'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
