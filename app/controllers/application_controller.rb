@@ -12,6 +12,8 @@ private
   end
 
   def set_oauth_tokens
+    #TODO: Make it so that user_id does not need to be sent
+    #To achieve this, the session needs to be stored on the server-side
     user ||= User.find(user_id)
     @oauth_token ||= user.oauth_token
     @oauth_token_secret ||= user.oauth_token_secret
@@ -31,7 +33,7 @@ private
   end
 
   def user_id
-    params[:controller] == 'users' ? params[:id] : params[:user_id]
+    params[:user_id] || params[:id]
   end
 
 end

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   respond_to :json
-  skip_before_filter :set_oauth_tokens
-  skip_before_filter :verify_oauth_token
+  skip_before_filter :set_oauth_tokens, only: [:create]
+  skip_before_filter :verify_oauth_token, only: [:create]
 
   def create
     user = User.where(nickname: params[:nickname]).first
@@ -13,6 +13,11 @@ class UsersController < ApplicationController
     end
     # respond_with :user fails with a cryptic error
     render json: user.to_json
+  end
+
+  def show
+    cached_user = cache(cache_key) { logger.debug "TWITTER/USER"; twitter_client.user }
+    respond_with cached_user
   end
 
   private

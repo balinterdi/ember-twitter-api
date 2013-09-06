@@ -5,12 +5,13 @@ EmberTwitterApi::Application.routes.draw do
     resources :timelines do
       get :home, on: :collection
     end
-    resource :user, only: :show
+    resources :users, only: :show
   end
 
   resources  :users, only: :create
 
   get 'home' => 'home#index'
+  get 'user' => 'users#show'
 
   root  to:   'home#index'
 end
