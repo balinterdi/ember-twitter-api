@@ -8,9 +8,8 @@ EmberTwitterApi::Application.routes.draw do
     resources :users, only: :show
   end
 
-  resources  :users, only: :create
-
   get 'home' => 'home#index'
+  #TODO: Move this under the :twitter namespace
   get 'user' => 'users#show'
 
   root  to:   'home#index'

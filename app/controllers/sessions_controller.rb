@@ -1,11 +1,10 @@
 class SessionsController < ApplicationController
-  skip_before_filter :authenticate_with_twitter
-
-  respond_to :html, :json
+  skip_before_filter :set_oauth_tokens
 
   def create
     user = update_user
-    respond_with user
+    #FIXME: Redirect to the url the user came from at the start of the auth flow
+    redirect_to "http://localhost:3001/#/token/#{user.oauth_token}"
   end
 
 private
